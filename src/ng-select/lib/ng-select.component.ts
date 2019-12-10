@@ -90,6 +90,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
     @Input() dropdownPosition: DropdownPosition = 'auto';
     @Input() appendTo: string;
     @Input() loading = false;
+    @Input() showOnFocus = true;
     @Input() closeOnSelect = true;
     @Input() hideSelected = false;
     @Input() selectOnTab = false;
@@ -337,11 +338,16 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
             this.focus();
         }
 
-        if (this.searchable) {
-            this.open();
+        if(this.showOnFocus) {
+            if (this.searchable) {
+                this.open();
+            } else {
+                this.toggle();
+            }
         } else {
-            this.toggle();
+            this.close();
         }
+        
     }
 
     handleArrowClick() {
